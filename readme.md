@@ -1,1 +1,7 @@
-Inicial flask sales enviroment
+# Lista de ventas globales
+
+## Instalación
+Ejecutar
+'''
+pip install -r requirements.txt
+'''

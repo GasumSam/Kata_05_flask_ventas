@@ -1,7 +1,27 @@
-from flask import Flask
+from flask import Flask, render_template
+import csv
 
 app = Flask(__name__)
 
+#file = open('./sales10.csv', 'r')
+#linea = file.readline()
+#while linea != '':
+#    registro = linea.split(',')
+
 @app.route('/')
 def index():
-    return 'Hola mundo'
+    fVentas = open('./sales10.csv', 'r')
+    csvreader = csv.reader(fVentas, delimiter=',')
+
+    registros =[]
+    d = {}
+    for linea in csvreader:
+        registros.append(linea)
+        if linea[0] in d:
+            d[linea[0]]['ingresos'] += float(linea[11])
+            d[linea[0]]['beneficios'] += float(linea[13])
+        else:
+            if linea[0] != 'region':
+                d[linea[0]] = {'ingresos': float(linea[11]), 'beneficios': float(linea[13])}
+
+    return render_template('region.html', titulo='GLOBAL SL')

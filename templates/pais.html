@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Ventas por paí<samp></samp>{% endblock %}
+
+{% block contenido %}
+<h1>Ventas por {{region_nm}}, desglosadas por país<a class="button" href="/">Atrás</a></h1>
+    <table>
+        <tr>
+            <th>País</th>
+            <th>Ventas</th>
+            <th>Beneficios</th>
+        </tr>
+        {% for region, data in ventas_pais.items() %}
+        <tr>
+            <td class="pais">{{ pais }}</td>  
+            <td>{{ data.ingresos }}</td>
+            <td>{{ data.beneficios }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

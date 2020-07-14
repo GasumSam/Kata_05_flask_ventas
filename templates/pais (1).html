@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Global S.L</title>
+    <link rel="stylesheet" href="/static/styles_pais.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <header>
+        Global S.L.
+    </header>
+    <h1>Ventas en {{region_nm}} , deglosadas por país</h1>
+    <table>
+        <tr>
+            <th>País</th>
+            <th>Ventas</th>
+            <th>Beneficios</th>
+        </tr>
+        {% for pais,data in ventas_pais.items()%}
+        <tr>
+            <td class="pais">{{pais}}</td>
+            <td>{{data.ingresos}}</td>
+            <td>{{data.beneficios}}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+    <footer>
+        &copy; 2020 - Todos los derechos reservados 
+    </footer>
+</body>
+</html>

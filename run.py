@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
-import csv
+import csv, sqlite3
 
 app = Flask(__name__)
+BASE_DATOS = "./data/ventas.db"
 
 #file = open('./sales10.csv', 'r')
 #linea = file.readline()
@@ -43,5 +44,23 @@ def paises():
 
     return render_template('pais.html', ventas_pais=d, region_nm=request.values['region'])
 
-    #return #'Aquí irá un listado de países por región' + region_name
+@app.route("/productos")
+def productos():
+    conn = sqlite3.connect(BASE_DATOS)
+    cur = conn.cursor()
+
+    query = "SELECT id, tipo_producto, precio_unitario, coste_unitario FROM productos"
+    productos = cur.execute(query).fetchall()  #Léemelo todo
+
+    conn.close()
+    return render_template('productos.html', productos=productos)
+
+@app.route("/addproducto", methods=['GET', 'POST'])  #Si no ponemos nada, por defecto el método es GET
+def addproduct():
+    if request.method == 'GET':
+        return render_template('newproduct.html') #me devuelves el newproduct.html vacío
+    else:
+        return 'Debo grabar un registro con {}, {}, {}'.format(request.values['tipo_producto'], 
+                                                                request.values['precio_unitario'],
+                                                                request.values['coste_unitario'])
 

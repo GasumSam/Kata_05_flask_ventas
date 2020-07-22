@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Alta de producto {% endblock %}
+
+{% block contenido %}
+    <h1>Alta de producto</h1>
+    {% if error_gral %}
+        <p class="error-msg">{{error_gral}}</p>
+    {% endif %}
+    <form class="u-full-width" action="/addproducto" method="post">
+        {{ form.hidden_tag() }}
+        {% if form.tipo_producto.errors %}
+            {{ form.tipo_producto(class="u-full-width error", placeholder="Producto") }}
+            {% for error in form.tipo_producto.errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor%}
+            {#  Soy un comentario #}
+            {% else %}
+            {{ form.tipo_producto(class="u-full-width", placeholder="Producto") }}
+        {% endif %}
+        
+        {% if form.precio_unitario.errors %}
+            {{ form.precio_unitario(class="u-full-width error", placeholder="Precio unitario") }}
+            {% for error in form.precio_unitario.errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor%}
+        {% else %}
+            {{ form.precio_unitario(class="u-full-width", placeholder="Precio unitario") }}
+        {% endif %}
+
+        {% if form.coste_unitario.errors %}
+            {{ form.coste_unitario(class="u-full-width error", placeholder="Coste") }}
+            {% for error in form.coste_unitario.errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor%}
+        {% else %}
+            {{ form.coste_unitario(class="u-full-width", placeholder="Coste") }}
+        {% endif %}
+
+        {{ form.submit(class="button-primary")}}
+
+
+
+
+        <!--label for="tipo_producto">Tipo de Producto:</label>
+        <input class="u-full-width" type="text" name="tipo_producto" id="tipo_producto" />
+        <label for="precio_unitario">Precio U.:</label>
+        <input class="u-full-width" type="number" name="precio_unitario" id="precio_unitario" step="0.01">
+        <label for="coste_unitario">Coste U.:</label>
+        <input class="u-full-width" type="number" name="coste_unitario" id="coste_unitario" step="0.01"><br />
+        <input type="submit" class="button-primary" value="Aceptar"-->
+    </form>
+
+{% endblock %}

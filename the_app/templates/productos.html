@@ -13,7 +13,7 @@
         </tr>
         {% for producto in productos %}
         <tr>
-            <td class="producto">{{ producto[0] }}</td>  
+            <td class="producto"><a href="/modificaproducto?id={{producto[0]}}">{{ producto[1] }}</a></td>  
             <td>{{ producto[1] }}</td>
             <td>{{ producto[2] }}</td>
         </tr>
